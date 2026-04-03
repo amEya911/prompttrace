@@ -1,6 +1,6 @@
 {
   "name": "prompttrace",
-  "version": "0.1.0",
+  "version": "0.1.4",
   "description": "Local-first LLM observability and prompt optimization SDK. Track tokens, reduce cost, and detect context bloat in real-time.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -44,8 +44,12 @@
   ],
   "author": "Ameya Kulkarni",
   "license": "MIT",
+  "homepage": "https://github.com/amEya911/prompttrace",
+  "bugs": {
+    "url": "https://github.com/amEya911/prompttrace/issues"
+  },
   "repository": {
     "type": "git",
-    "url": "https://github.com/YOUR_USERNAME/prompttrace"
+    "url": "https://github.com/amEya911/prompttrace.git"
   }
 }

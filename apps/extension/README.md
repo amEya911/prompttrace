@@ -2,7 +2,11 @@
 
 > Real-time LLM cost optimization assistant inside your editor.
 
-Prompttrace Extension watches your local `.prompttrace/traces.json` for new LLM traces, then instantly surfaces actionable cost insights, context bloat warnings, and simulated savings — all without leaving your editor.
+- **Cache Hotspot** — Identifies repeated prompts that should be cached to save 100% of their cost.
+- **Zero Cloud** — Reads directly from your local `.prompttrace/traces.jsonl` file.
+- **High Performance** — Handles large trace files efficiently using backward streaming (no full file reads).
+
+Prompttrace Extension watches your local `.prompttrace/traces.jsonl` for new LLM traces, then instantly surfaces actionable cost insights, context bloat warnings, and simulated savings—all without leaving your editor.
 
 It integrates directly with the existing [Prompttrace SDK](/packages/sdk) — zero reimplementation, zero external APIs, fully local.
 
@@ -11,11 +15,11 @@ It integrates directly with the existing [Prompttrace SDK](/packages/sdk) — ze
 ## Features
 
 - **Inline Popups** — Instant cost/token summary after every LLM call, filtered to show only high-severity insights
+- **Clipboard Analyzer** — Detects prompt issues instantly when copying large prompts from any source
+- **Live Prompt Detection** — Analyzes text as you type inside the editor before calling any API
 - **Side Panel Dashboard** — Aggregated cost view, per-trace breakdowns, impact simulations
 - **Smart File Watching** — Uses `chokidar` with debounce to detect new traces automatically
 - **Mock Mode** — Generate realistic test traces without API keys
-- **Toggle Control** — Enable/disable via command palette or status bar click
-- **Popup Cooldown** — 5-second debounce prevents notification spam during rapid development
 
 ---
 
@@ -26,15 +30,11 @@ It integrates directly with the existing [Prompttrace SDK](/packages/sdk) — ze
 ```mermaid
 flowchart LR
     A["LLM Call<br/>(your app)"] --> B["SDK<br/>traceLLM()"]
-    B --> C[".prompttrace/<br/>traces.json"]
+    B --> C[".prompttrace/<br/>traces.jsonl"]
     C -->|chokidar watch| D["Extension<br/>integration.ts"]
     D --> E{"Severity<br/>Filter"}
     E -->|HIGH| F["Inline Popup<br/>popup.ts"]
     E -->|ALL| G["Side Panel<br/>webview.ts"]
-    F --> H["User Actions"]
-    H -->|Optimize| I["SDK<br/>optimizePrompt()"]
-    H -->|View Details| G
-    H -->|Hide| J["State<br/>globalState"]
 ```
 
 ### Mock Mode Flow
@@ -42,7 +42,7 @@ flowchart LR
 ```mermaid
 flowchart LR
     A["Cmd: prompttrace.runMock"] --> B["generateMockTrace()<br/>integration.ts"]
-    B --> C["Write to<br/>.prompttrace/traces.json"]
+    B --> C["Write to<br/>.prompttrace/traces.jsonl"]
     C -->|chokidar detects| D["File Change Event"]
     D --> E["Popup + Panel<br/>Auto-Update"]
 ```
@@ -112,7 +112,7 @@ Press `Cmd+Shift+P` (or `Ctrl+Shift+P`) and run:
 Prompttrace: Run Mock Trace
 ```
 
-This generates a realistic trace with a bloated system prompt and conversation history, writes it to `.prompttrace/traces.json`, and triggers both the inline popup and sidebar update.
+This generates a realistic trace with a bloated system prompt and conversation history, writes it to `.prompttrace/traces.jsonl`, and triggers both the inline popup and sidebar update.
 
 ### 4. Use with Real SDK
 
