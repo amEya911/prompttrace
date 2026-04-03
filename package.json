@@ -1,0 +1,16 @@
+{
+  "name": "prompttrace-monorepo",
+  "version": "1.0.0",
+  "description": "Developer tool to track, analyze, and optimize LLM token usage.",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "apps/*",
+    "examples/*"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces --if-present",
+    "dev": "npm run dev --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present"
+  }
+}

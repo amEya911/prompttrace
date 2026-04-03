@@ -1,0 +1,109 @@
+{
+  "name": "prompttrace-extension",
+  "displayName": "Prompttrace",
+  "description": "Real-time LLM cost optimization assistant inside your editor. Tracks token usage, detects context bloat, and simulates savings.",
+  "version": "0.1.0",
+  "publisher": "prompttrace",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other",
+    "Machine Learning",
+    "Debuggers"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "prompttrace.toggle",
+        "title": "Prompttrace: Toggle On/Off"
+      },
+      {
+        "command": "prompttrace.showPanel",
+        "title": "Prompttrace: Show Side Panel"
+      },
+      {
+        "command": "prompttrace.showLastTrace",
+        "title": "Prompttrace: Show Latest Trace"
+      },
+      {
+        "command": "prompttrace.runMock",
+        "title": "Prompttrace: Run Mock Trace"
+      },
+      {
+        "command": "prompttrace.analyzeInput",
+        "title": "Prompttrace: Analyze Current Input"
+      },
+      {
+        "command": "prompttrace.analyzeClipboard",
+        "title": "Prompttrace: Analyze Clipboard"
+      },
+      {
+        "command": "prompttrace.optimizeInline",
+        "title": "Prompttrace: Optimize Current Prompt"
+      },
+      {
+        "command": "prompttrace.toggleClipboard",
+        "title": "Prompttrace: Toggle Clipboard Analysis"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "prompttrace-sidebar",
+          "title": "Prompttrace",
+          "icon": "$(pulse)"
+        }
+      ]
+    },
+    "views": {
+      "prompttrace-sidebar": [
+        {
+          "type": "webview",
+          "id": "prompttrace.panel",
+          "name": "Prompttrace",
+          "icon": "$(pulse)"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Prompttrace",
+      "properties": {
+        "prompttrace.aiModel": {
+          "type": "string",
+          "default": "gpt-4o-mini",
+          "description": "The LLM model to use for intelligent prompt refinement (e.g. gpt-4o-mini, llama-3.1-8b)."
+        },
+        "prompttrace.apiUrl": {
+          "type": "string",
+          "default": "https://api.openai.com/v1",
+          "description": "Optional: Custom API base URL for open-source model providers (Groq, OpenRouter, Ollama)."
+        },
+        "prompttrace.apiKey": {
+          "type": "string",
+          "default": "",
+          "description": "Optional: API Key for AI-powered prompt refinement. Leave blank if using default OpenAI env keys."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "build": "node esbuild.js",
+    "watch": "node esbuild.js --watch",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "prompttrace": "*",
+    "chokidar": "^3.6.0"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0",
+    "@types/node": "^20.0.0",
+    "esbuild": "^0.20.0",
+    "typescript": "^5.0.0"
+  }
+}

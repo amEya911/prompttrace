@@ -1,0 +1,19 @@
+{
+  "name": "basic-example",
+  "version": "1.0.0",
+  "description": "Example using prompttrace",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "ts-node src/index.ts",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "openai": "^4.0.0",
+    "prompttrace": "*",
+    "dotenv": "^16.0.0"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.0"
+  }
+}

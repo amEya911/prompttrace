@@ -1,0 +1,51 @@
+{
+  "name": "prompttrace",
+  "version": "0.1.0",
+  "description": "Local-first LLM observability and prompt optimization SDK. Track tokens, reduce cost, and detect context bloat in real-time.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist",
+    "test": "jest"
+  },
+  "dependencies": {
+    "tiktoken": "^1.0.17"
+  },
+  "peerDependencies": {
+    "openai": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "@types/node": "^20.0.0",
+    "jest": "^30.3.0",
+    "ts-jest": "^29.4.9",
+    "typescript": "^5.0.0"
+  },
+  "keywords": [
+    "llm",
+    "openai",
+    "ai",
+    "prompt",
+    "token",
+    "cost",
+    "observability",
+    "developer-tools"
+  ],
+  "author": "Ameya Kulkarni",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/YOUR_USERNAME/prompttrace"
+  }
+}
